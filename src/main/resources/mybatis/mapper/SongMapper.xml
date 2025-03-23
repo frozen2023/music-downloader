@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.mapper.SongMapper">
+    <insert id="addSong" parameterType="song">
+        insert into music.song (name, artist, album, duration,rid) values (#{name},#{artist},#{album},#{duration},#{rid})
+    </insert>
+
+    <select id="getSongByRid" resultType="song">
+        select * from music.song where rid = #{rid}
+    </select>
+
+    <!--<select id="ifExist" resultType="song">
+        select * from music.song where rid = #{rid}
+    </select>-->
+
+</mapper>

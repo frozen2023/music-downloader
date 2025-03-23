@@ -1,0 +1,13 @@
+server:
+  port: 8000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/music?useSSL=true&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+mybatis:
+  type-aliases-package: com.chen.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

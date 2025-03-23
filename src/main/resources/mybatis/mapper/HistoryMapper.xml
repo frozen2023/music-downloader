@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.mapper.HistoryMapper">
+    <insert id="addHistory" parameterType="history">
+        insert into music.history (rid, user_id, id) values (#{rid},#{userId},#{id})
+    </insert>
+    <select id="countByUserId" resultType="int">
+        select count(1) from music.history where user_id =#{userId}
+    </select>
+    <select id="ifExist" parameterType="history" resultType="history">
+        select * from music.history where user_id = #{userId} and rid =#{rid}
+    </select>
+    <delete id="deleteHistoryById">
+        delete from music.history where user_id=#{userId} and id = #{id}
+    </delete>
+    <select id="getHistoryByUserIdAndPage" resultType="songAndHistory">
+        SELECT distinct h.rid, s.name,s.artist,s.album,s.duration,h.fav,h.id FROM music.history h
+        INNER JOIN music.song s
+        ON h.rid = s.rid
+        WHERE h.user_id=#{userId}
+        LIMIT #{start},10
+    </select>
+    <update id="setHistoryFav">
+        update music.history set fav=#{fav} where id=#{id} and user_id=#{userId}
+    </update>
+    <select id="getSongMsgById" resultType="song">
+        select s.* from music.history h
+        inner join music.song s
+        on h.rid =s.rid
+        where h.user_id =#{userId} and h.id =#{id}
+    </select>
+</mapper>

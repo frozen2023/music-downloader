@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.mapper.UserMapper">
+    <insert id="addUser" parameterType="user">
+        insert into music.user (username, password,user_id) values (#{username},#{password},#{userId})
+    </insert>
+    <select id="getIdByUsername" parameterType="java.lang.String" resultType="int">
+        select user_id from music.user where username=#{username}
+    </select>
+    <select id="countTotal" resultType="int" >
+        select count(1) from music.user
+    </select>
+    <select id="getUserByName" resultType="user">
+        select * from music.user where username=#{username}
+    </select>
+</mapper>
